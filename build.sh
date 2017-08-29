@@ -34,11 +34,11 @@ apt-get install -y \
         libboost-all-dev \
         && apt-get clean
 
-wget https://github.com/opencv/opencv/archive/$VERSION.tar.gz
+wget -q https://github.com/opencv/opencv/archive/$VERSION.tar.gz
 tar xzf $VERSION.tar.gz
-mkdir -p /opencv-$VERSION/cmake_binary \
+mkdir -p opencv-$VERSION/cmake_binary \
     && ls \
-    && (cd /opencv-$VERSION/cmake_binary \
+    && (cd opencv-$VERSION/cmake_binary \
     && cmake \
     -DBUILD_TIFF=ON \
     -DBUILD_opencv_java=OFF \
@@ -67,4 +67,4 @@ mkdir -p /opencv-$VERSION/cmake_binary \
     -DBUILD_TESTS=OFF \
     -DINSTALL_C_EXAMPLES=OFF \
     ..  && make install ) \
-        && rm -rf $VERSION.tar.gz /opencv-$VERSION
+        && rm -rf $VERSION.tar.gz opencv-$VERSION
