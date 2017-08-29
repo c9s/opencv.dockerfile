@@ -45,6 +45,7 @@ RUN mkdir -p /opencv-$VERSION/cmake_binary \
     && cmake \
     -DBUILD_TIFF=ON \
     -DBUILD_opencv_java=OFF \
+    -DCMAKE_BUILD_TYPE=RELEASE \
     -DWITH_CUDA=$CUDA \
     -DENABLE_AVX=$AVX \
     -DENABLE_AVX2=$AVX2 \
@@ -66,8 +67,7 @@ RUN mkdir -p /opencv-$VERSION/cmake_binary \
     -DWITH_FFMPEG=ON \
     -DENABLE_PRECOMPILED_HEADERS=ON \
     -DBUILD_PERF_TESTS=OFF \
-    -DBUILD_TESTS=ON \
-    -DCMAKE_BUILD_TYPE=RELEASE \
+    -DBUILD_TESTS=OFF \
     -DINSTALL_C_EXAMPLES=OFF \
     ..  && make install ) \
         && rm -rf $VERSION.tar.gz /opencv-$VERSION
