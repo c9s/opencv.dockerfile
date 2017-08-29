@@ -1,5 +1,4 @@
 #!/bin/bash
-VERSION=3.3.0
 AVX=ON
 AVX2=ON
 SSE41=ON
@@ -11,6 +10,8 @@ OPENGL=ON
 VERSION=3.3.0
 GTK=OFF
 QT=OFF
+
+ROOT=$HOME
 
 apt-get update && \
 apt-get install -y \
@@ -31,14 +32,14 @@ apt-get install -y \
         libjasper-dev \
         libavformat-dev \
         libpq-dev \
-        libboost-all-dev \
-        && apt-get clean
+        libboost-all-dev
 
-wget -q https://github.com/opencv/opencv/archive/$VERSION.tar.gz
-tar xzf $VERSION.tar.gz
-mkdir -p opencv-$VERSION/cmake_binary \
+wget -c https://github.com/opencv/opencv/archive/$VERSION.tar.gz
+tar xvzf $VERSION.tar.gz -C $ROOT 
+
+mkdir -p $ROOT/opencv-$VERSION/cmake_binary \
     && ls \
-    && (cd opencv-$VERSION/cmake_binary \
+    && (cd $ROOT/opencv-$VERSION/cmake_binary \
     && cmake \
     -DBUILD_TIFF=ON \
     -DBUILD_opencv_java=OFF \
@@ -66,5 +67,6 @@ mkdir -p opencv-$VERSION/cmake_binary \
     -DBUILD_PERF_TESTS=OFF \
     -DBUILD_TESTS=OFF \
     -DINSTALL_C_EXAMPLES=OFF \
-    ..  && make install ) \
-        && rm -rf $VERSION.tar.gz opencv-$VERSION
+    ..  && make install)
+
+# rm -rf $VERSION.tar.gz $ROOT/opencv-$VERSION
