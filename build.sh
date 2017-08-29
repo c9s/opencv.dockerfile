@@ -67,6 +67,6 @@ mkdir -p $ROOT/opencv-$VERSION/cmake_binary \
     -DBUILD_PERF_TESTS=OFF \
     -DBUILD_TESTS=OFF \
     -DINSTALL_C_EXAMPLES=OFF \
-    ..  && make install)
+    ..  && make && make install)
 
 # rm -rf $VERSION.tar.gz $ROOT/opencv-$VERSION
