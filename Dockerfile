@@ -13,6 +13,8 @@ ARG OPENCL=OFF
 ARG OPENCL_SVM=OFF
 ARG OPENGL=ON
 ARG VERSION=3.3.0
+ARG GTK=OFF
+ARG QT=OFF
 
 RUN apt-get update && \
         apt-get install -y \
@@ -53,13 +55,13 @@ RUN mkdir -p /opencv-$VERSION/cmake_binary \
     -DENABLE_SSE42=$SSE42 \
     -DENABLE_SSSE3=ON \
     -DWITH_OPENGL=$OPENGL \
-    -DWITH_GTK=OFF \
+    -DWITH_GTK=$GTK \
+    -DWITH_QT=$QT \
     -DWITH_OPENCL=$OPENCL \
     -DWITH_OPENCL_SVM=$OPENCL_SVM \
     -DWITH_JPEG=ON \
     -DWITH_WEBP=ON \
     -DWITH_PNG=ON \
-    -DWITH_QT=OFF \
     -DWITH_IPP=ON \
     -DWITH_TBB=ON \
     -DWITH_EIGEN=ON \
