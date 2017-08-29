@@ -16,6 +16,9 @@ ARG VERSION=3.3.0
 ARG GTK=OFF
 ARG QT=OFF
 
+# Intel Threading Building Blocks
+ARG TBB=ON
+
 RUN apt-get update && \
         apt-get install -y \
         build-essential \
@@ -63,7 +66,7 @@ RUN mkdir -p /opencv-$VERSION/cmake_binary \
     -DWITH_WEBP=ON \
     -DWITH_PNG=ON \
     -DWITH_IPP=ON \
-    -DWITH_TBB=ON \
+    -DWITH_TBB=$TBB \
     -DWITH_EIGEN=ON \
     -DWITH_V4L=ON \
     -DWITH_FFMPEG=ON \
