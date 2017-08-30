@@ -8,12 +8,13 @@ OPENCL=ON
 OPENCL_SVM=OFF
 OPENGL=ON
 VERSION=3.3.0
-GTK=OFF
+# GTK=OFF
+GTK=ON
 QT=OFF
 
-# PYTHON_BIN=/usr/local/bin/python3.6
+PYTHON_BIN=/usr/bin/python3.6
 # PYTHON_BIN=python
-PYTHON_BIN=/home/linker/.pyenv/shims/python
+# PYTHON_BIN=/home/linker/.pyenv/shims/python
 PYTHON_INCLUDE_DIR=$($PYTHON_BIN -c "from distutils.sysconfig import get_python_inc; print(get_python_inc())")
 PYTHON_PACKAGE_PATH=$($PYTHON_BIN -c "from distutils.sysconfig import get_python_lib; print(get_python_lib())")
 
@@ -25,8 +26,8 @@ echo $PYTHON_PACKAGE_PATH
 ROOT=$HOME
 
 if [[ $(uname) == "Linux" ]] ; then
-apt-get update && \
-apt-get install -y \
+sudo apt-get update && \
+sudo apt-get install -y \
         build-essential \
         cmake \
         git \
@@ -44,7 +45,8 @@ apt-get install -y \
         libjasper-dev \
         libavformat-dev \
         libpq-dev \
-        libboost-all-dev
+        libboost-all-dev \
+        libgtk2.0-dev
 fi
 
 # wget -c https://github.com/opencv/opencv/archive/$VERSION.tar.gz
@@ -81,12 +83,12 @@ mkdir -p $ROOT/opencv-$VERSION/cmake_binary \
     -DBUILD_PERF_TESTS=OFF \
     -DBUILD_TESTS=OFF \
     -DPYTHON3_EXECUTABLE=$PYTHON_BIN \
-    -DPYTHON3_LIBRARIES=/home/linker/.pyenv/versions/3.6.2/lib/python3.6/libpython3.6m.a \
+    -DPYTHON3_LIBRARIES=/usr/lib/x86_64-linux-gnu/libpython-3.6m.so \
     -DPYTHON3_INCLUDE_DIR=$PYTHON_INCLUDE_DIR \
     -DPYTHON3_PACKAGES_PATH=$PYTHON_PACKAGE_PATH \
     -DCMAKE_INSTALL_PREFIX="/usr/local" \
     -DINSTALL_C_EXAMPLES=OFF \
-    ..  && make -j8)
+    ..  && make -j8 && sudo make install)
 
 # -DCMAKE_INSTALL_PREFIX=$($PYTHON_BIN -c "import sys; print(sys.prefix)") \
 # rm -rf $VERSION.tar.gz $ROOT/opencv-$VERSION
